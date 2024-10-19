@@ -80,8 +80,13 @@ $ cd amazon-clone
 ```
 
 Move to this folder for all other commands.
+### 3. Launch Flask file
+After you are inside the `amazon-clone` folder you will have to activate the virtual environment. Paste the following command,
+```sh
+$ venv/Scripts/activate
+```
 
-### 3. Set it up :arrow_up:
+### 4. Set it up :arrow_up:
 
 Run the following commands to see that _your local copy_ has a reference to _your forked remote repository_ in Github :octocat:
 
@@ -119,7 +124,7 @@ upstream  https://github.com/niegfg/amazon-clone.git (fetch)
 upstream  https://github.com/niegfg/amazon-clone.git (push)
 ```
 
-### 4. Sync it :recycle:
+### 5. Sync it :recycle:
 
 Always keep your local copy of the repository updated with the original repository.
 Before making any changes and/or in an appropriate interval, run the following commands _carefully_ to update your local repository.
@@ -138,11 +143,11 @@ $ git reset --hard upstream/main
 $ git push origin main
 ```
 
-### 5. Ready Steady Go... :turtle: :rabbit2:
+### 6. Ready Steady Go... :turtle: :rabbit2:
 
 Once you have completed these steps, you are ready to start contributing by checking our `Good First Issue` Issues and creating [pull requests](https://github.com/niegfg/amazon-clone/pulls).
 
-### 6. Create a new branch :bangbang:
+### 7. Create a new branch :bangbang:
 
 Whenever you are going to contribute. Please create a separate branch using command and keep your `main` branch clean (i.e. synced with remote branch).
 
