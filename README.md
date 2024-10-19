@@ -85,6 +85,10 @@ After you are inside the `amazon-clone` folder you will have to activate the vir
 ```sh
 $ venv/Scripts/activate
 ```
+after your virtual environment is running you can now run the flask app. Paste the following command, 
+```sh
+$ python app.py
+```
 
 ### 4. Set it up :arrow_up:
 
