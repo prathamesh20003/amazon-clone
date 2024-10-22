@@ -1,4 +1,155 @@
 /* SECTION 1 */
+.header {
+  position: fixed;
+  top: -2px ;
+  z-index: 1;
+  width: 100%;
+  height: 70px;
+  background-color: var(--major-bg-color);
+  align-items: center;
+  display: flex;
+}
+
+.header {
+  margin-top: 2px;
+  display: flex;
+}
+
+.header .nav_left{
+  width: 1000px;
+  margin-left: 20px;
+  margin-right: 200px;
+}
+
+.header .amazon-logo {
+  width: 100px;
+  height: 30px;
+  margin-top: 2px;
+  display: flex;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+  background-color: #E6E6E6;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.dropdown .dropbtn {
+  height: 45px;
+  width: 70px;
+  cursor: pointer;
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: rgb(0, 0, 0);
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+.dropdown .dropbtn .droptext{
+  color: black;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.header .header-search {
+  width: 900px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border-radius: 10px !important;
+}
+
+.header .header-search .search-input {
+  width: 700px;
+  height: 45px;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+}
+
+.header .header-search .search-button {
+  width: 50px;
+  height: 45px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background-color: var(--amazon-major-color);
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  color: #232323;
+}
+
+.header .nav_right{
+  width: 100%;
+}
+
+.header .account{
+  margin-left: 100px;
+}
+
+.header .account_create{
+  color: #efefef;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 23px;
+  padding-bottom: 23px;
+  text-decoration: none;
+}
+
+.header .header-cart {
+  color: #efefef;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  text-decoration: none;
+}
+
+.header .header-cart svg {
+  width: 40px;
+  height: 40px;
+  padding-top: 5px;
+}
+
 .product-heading {
   width: 100%;
   height: 100px;

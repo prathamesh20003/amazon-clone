@@ -93,6 +93,7 @@
 .inputGroup input:focus{
   outline: none;
 }
+
 .submitBtn{
     width: 150px;
     padding: 1em;
