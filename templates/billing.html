@@ -288,53 +288,67 @@
         
                   <div class="my-3">
                     <div class="form-check">
-                      <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
-                      <label class="form-check-label" for="credit">Credit card</label>
+                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="" onclick="togglePaymentMethod('card')">
+                        <label class="form-check-label" for="credit">Credit card</label>
                     </div>
                     <div class="form-check">
-                      <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
-                      <label class="form-check-label" for="debit">Debit card</label>
+                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="" onclick="togglePaymentMethod('card')">
+                        <label class="form-check-label" for="debit">Debit card</label>
                     </div>
                     <div class="form-check">
-                      <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required="">
-                      <label class="form-check-label" for="paypal">PayPal</label>
+                        <input id="UPI" name="paymentMethod" type="radio" class="form-check-input" required="" onclick="togglePaymentMethod('upi')">
+                        <label class="form-check-label" for="UPI">UPI</label>
                     </div>
-                  </div>
-        
-                  <div class="row gy-3">
+                </div>
+                
+                <div class="row gy-3" id="card-info">
                     <div class="col-md-6">
-                      <label for="cc-name" class="form-label">Name on card</label>
-                      <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                      <small class="text-muted">Full name as displayed on card</small>
-                      <div class="invalid-feedback">
-                        Name on card is required
-                      </div>
+                        <label for="cc-name" class="form-label">Name on card</label>
+                        <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+                        <small class="text-muted">Full name as displayed on card</small>
+                        <div class="invalid-feedback">Name on card is required</div>
                     </div>
-        
+                
                     <div class="col-md-6">
-                      <label for="cc-number" class="form-label">Credit card number</label>
-                      <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-                      <div class="invalid-feedback">
-                        Credit card number is required
-                      </div>
+                        <label for="cc-number" class="form-label">Credit/Debit card number</label>
+                        <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+                        <div class="invalid-feedback">Card number is required</div>
                     </div>
-        
+                
                     <div class="col-md-3">
-                      <label for="cc-expiration" class="form-label">Expiration</label>
-                      <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-                      <div class="invalid-feedback">
-                        Expiration date required
-                      </div>
+                        <label for="cc-expiration" class="form-label">Expiration</label>
+                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+                        <div class="invalid-feedback">Expiration date required</div>
                     </div>
-        
+                
                     <div class="col-md-3">
-                      <label for="cc-cvv" class="form-label">CVV</label>
-                      <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-                      <div class="invalid-feedback">
-                        Security code required
-                      </div>
+                        <label for="cc-cvv" class="form-label">CVV</label>
+                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+                        <div class="invalid-feedback">Security code required</div>
                     </div>
-                  </div>
+                </div>
+                
+                <!-- UPI Input Field -->
+                <div class="row gy-3" id="upi-info" style="display:none;">
+                    <div class="col-md-6">
+                        <label for="upi-id" class="form-label">UPI ID</label>
+                        <input type="text" class="form-control" id="upi-id" placeholder="e.g., name@bank" required="">
+                        <div class="invalid-feedback">UPI ID is required</div>
+                    </div>
+                </div>
+                
+                <script>
+                    function togglePaymentMethod(method) {
+                        if (method === 'upi') {
+                            document.getElementById('card-info').style.display = 'none';
+                            document.getElementById('upi-info').style.display = 'block';
+                        } else {
+                            document.getElementById('card-info').style.display = 'block';
+                            document.getElementById('upi-info').style.display = 'none';
+                        }
+                    }
+                </script>
+                
         
                   <hr class="my-4">
         
