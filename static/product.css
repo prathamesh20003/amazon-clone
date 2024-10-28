@@ -1,4 +1,24 @@
 /* SECTION 1 */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+/* VARIABLES */
+:root {
+  --major-bg-color: #131921;
+  --minor-bg-color: #ebeded;
+  --amazon-major-color: #febd68;
+  --accent-color: #293546;
+}
+
+/* BODY */
+body {
+  background-color: var(--minor-bg-color);
+}
+
+/* HEADER */
 .header {
   position: fixed;
   top: -2px ;
@@ -116,11 +136,12 @@
 
 .header .account{
   margin-left: 100px;
+  float: right;
 }
 
 .header .account_create{
   color: #efefef;
-  float: left;
+  float: right;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -211,6 +232,8 @@
   gap: 2px;
 }
 .product-detail-body .buttons .buy-now {
+  text-decoration: none;
+  text-align: center;
   width: 50%;
   border: none;
   background-color: #ffa41c;
@@ -220,6 +243,8 @@
   cursor: pointer;
 }
 .product-detail-body .buttons .add-to-cart {
+  text-decoration: none;
+  text-align: center;
   width: 50%;
   border: 2px solid #ffa41c;
   color: #ffa41c;

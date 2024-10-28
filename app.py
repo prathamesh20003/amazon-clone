@@ -1,13 +1,18 @@
 import firebase_admin
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from firebase_admin import credentials, firestore, auth
 
 firebaseConfig ={
-    #paste firebase database config from project settings
+    'apiKey': "AIzaSyC_-alE4HXmS7kG1E4zi3Bsud8t--KaXZc",
+    'authDomain': "clone-rospl-project.firebaseapp.com",
+    'projectId': "clone-rospl-project",
+    'storageBucket': "clone-rospl-project.appspot.com",
+    'messagingSenderId': "250595430287",
+    'appId': "1:250595430287:web:6a6eb16d544272ea8585fa"
 }
 
 # Initialize Firebase Admin with service account
-cred = credentials.Certificate("") #add file path of firebase sdk json file 
+cred = credentials.Certificate("D:\\downloads\\vscode\\rospl\\amazon-clone\\firebaseadmin.json")
 firebase_admin.initialize_app(cred)
 
 # Initialize Firestore
@@ -34,13 +39,28 @@ def SignUp():
 def billing():
     return render_template('billing.html')
 
-@app.route('/product')
-def product():
-    return render_template('product.html')
+@app.route('/product/<product_id>')
+def product(product_id):
+    email = session.get('email')  # Check if user is logged in and get email from session
+    username = session.get('username')
+
+    # Fetch product details from Firestore collection
+    product_ref = db.collection('products').document(product_id)
+    product = product_ref.get()
+
+    if product.exists:
+        product_data = product.to_dict()
+        return render_template('product.html', username=username, product=product_data)
+    else:
+        return "Product not found", 404
 
 @app.route('/userform')
 def userform():
     return render_template('UserForm.html')
+
+@app.route('/productform')
+def productform():
+    return render_template('ProductForm.html')
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -105,6 +125,44 @@ def login():
         flash('Login failed: {}'.format(str(e)), 'error')
         return redirect(url_for("SignIn"))
 
+@app.route('/add_product', methods=['POST'])
+def add_product():
+    try:
+        # Get form data (without trailing commas)
+        product_id = request.form.get('product_id')  # No trailing comma
+        name = request.form.get('name')  # No trailing comma
+        price = request.form.get('price')  # No trailing comma
+        image_url = request.form.get('image_url')  # No trailing comma
+        description = request.form.get('description')  # No trailing comma
+        features = request.form.get('features')  # No trailing comma
+        stock = request.form.get('stock')  # No trailing comma
+        display_category = request.form.get('display_category')  # No trailing comma
+        category = request.form.get('category')  # No trailing comma
+        sub_category = request.form.get('sub_category')  # No trailing comma
+
+        # Create a new product document in Firestore
+        product_ref = db.collection("products").document(product_id)
+        product_ref.set({
+            "product_id": product_id,
+            "name": name,
+            "price": price,
+            "image_url": image_url,
+            "description": description,
+            "features": features,
+            "stock": stock,
+            "display_category": display_category,
+            "category": category,
+            "sub_category": sub_category
+        })
+
+        return "Product added successfully!", 200
+    except Exception as e:
+        return f"An error occurred: {e}", 500
+
+@app.route('/product_click', methods=['POST'])
+def product_click():
+    return 1
+            
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
