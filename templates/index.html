@@ -45,8 +45,13 @@
     </div>
     <div class="nav_right">
       <div class="account">
+        {% if username %}
+        <a href="userform" class="account_create">{{ username }}</a>  <!-- Use 'email' here -->
+        <a href="{{ url_for('logout') }}" class="account_create">Logout</a>
+        {% else %}
         <a href="SignIn" class="account_create">SignIn</a>
         <a href="SignUp" class="account_create">SignUp</a>
+        {% endif %}
       </div>
           <a href="billing" class="header-cart">Cart
 
@@ -54,7 +59,7 @@
               <path style="cursor:pointer"
                 d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
             </svg>
-
+            
 
           </a>
     </div>
@@ -128,8 +133,13 @@
           <a href="">See more </a>
         </div>
         <div class="section-1-column">
+          {% if username %}
+          <h3>Welcome, {{username}}</h3>
+          <button><a href="userform">Profile</a></button>
+          {% else %}
           <h3>Sign in for your best experience</h3>
           <button><a href="SignIn">Sign In</a></button>
+          {% endif %}
         </div>
       </div>
     </section>

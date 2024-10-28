@@ -2,12 +2,17 @@ import firebase_admin
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from firebase_admin import credentials, firestore, auth
 
-firebaseConfig = {
-    #enter firebaseconfig from firebase
+firebaseConfig ={
+    'apiKey': "AIzaSyC_-alE4HXmS7kG1E4zi3Bsud8t--KaXZc",
+    'authDomain': "clone-rospl-project.firebaseapp.com",
+    'projectId': "clone-rospl-project",
+    'storageBucket': "clone-rospl-project.appspot.com",
+    'messagingSenderId': "250595430287",
+    'appId': "1:250595430287:web:6a6eb16d544272ea8585fa"
 }
 
 # Initialize Firebase Admin with service account
-cred = credentials.Certificate("") #enter path of firebase json file
+cred = credentials.Certificate("D:\\downloads\\vscode\\rospl\\amazon-clone\\firebaseadmin.json")
 firebase_admin.initialize_app(cred)
 
 # Initialize Firestore
@@ -18,7 +23,9 @@ app.secret_key = 'supersecretkey'  # Add a secret key for session management
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    email = session.get('email')  # Check if user is logged in and get email from session
+    username = session.get('username')
+    return render_template('index.html', username=username)  # Pass email to template
 
 @app.route('/SignIn')
 def SignIn():
@@ -35,6 +42,10 @@ def billing():
 @app.route('/product')
 def product():
     return render_template('product.html')
+
+@app.route('/userform')
+def userform():
+    return render_template('UserForm.html')
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -77,10 +88,23 @@ def login():
         # You may need to handle login on the client-side or use Firebase Authentication REST API
         user = auth.get_user_by_email(email)
 
-        # Store user in session (you can store user UID or other info)
-        session['user_id'] = user.uid
+        # Retrieve user information from Firestore
+        user_ref = db.collection("users").document(user.uid)
+        user_doc = user_ref.get()
+
+        if user_doc.exists:
+            # Get the username from Firestore
+            username = user_doc.to_dict().get("username")
+
+            # Store email and username in session after login
+            session['user_id'] = user.uid
+            session['email'] = user.email  # Store email in session
+            session['username'] = username  # Store username in session
         
-        return redirect(url_for("dashboard"))
+            return redirect(url_for("home"))
+        else:
+            flash('User not found', 'error')
+            return redirect(url_for("SignIn"))
     
     except Exception as e:
         flash('Login failed: {}'.format(str(e)), 'error')
@@ -90,13 +114,13 @@ def login():
 def dashboard():
     if 'user_id' not in session:
         return redirect(url_for('home'))  # Redirect if not logged in
-    return f'Welcome, {session["user_id"]}! <a href="/logout">Logout</a>'
+    email = session.get('email')  # Get the logged-in user's email from session
+    return f'Welcome, {email}! <a href="/logout">Logout</a>'
 
 @app.route('/logout')
 def logout():
-    session.pop('user_id', None)  # Remove user from session
+    session.clear()
     return redirect(url_for('home'))
-
 
 if __name__ == '__main__':
     app.run(debug=True)

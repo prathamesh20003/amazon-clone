@@ -135,11 +135,12 @@ body {
 
 .header .account{
   margin-left: 100px;
+  float: right;
 }
 
 .header .account_create{
   color: #efefef;
-  float: left;
+  float: right;
   display: flex;
   justify-content: center;
   align-items: center;
