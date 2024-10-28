@@ -3,16 +3,11 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from firebase_admin import credentials, firestore, auth
 
 firebaseConfig ={
-    'apiKey': "AIzaSyC_-alE4HXmS7kG1E4zi3Bsud8t--KaXZc",
-    'authDomain': "clone-rospl-project.firebaseapp.com",
-    'projectId': "clone-rospl-project",
-    'storageBucket': "clone-rospl-project.appspot.com",
-    'messagingSenderId': "250595430287",
-    'appId': "1:250595430287:web:6a6eb16d544272ea8585fa"
+    #paste firebase database config from project settings
 }
 
 # Initialize Firebase Admin with service account
-cred = credentials.Certificate("D:\\downloads\\vscode\\rospl\\amazon-clone\\firebaseadmin.json")
+cred = credentials.Certificate("") #add file path of firebase sdk json file 
 firebase_admin.initialize_app(cred)
 
 # Initialize Firestore
