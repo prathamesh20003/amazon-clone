@@ -15,6 +15,47 @@
 
 </head>
 
+<style>
+  .product-container {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      padding: 20px;
+      gap: 10px;
+  }
+
+  .product-container::-webkit-scrollbar {
+    height: 10px; /* Height of the scrollbar */
+}
+
+  .product-container::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar */
+    border-radius: 5px;
+  }
+
+  .product-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+  
+  .product {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin: 10px;
+      width: 250px;
+      height: 300px;
+      text-align: center;
+      color: black;
+  }
+  .section-2 a{
+    text-decoration: none;
+  }
+  .product img {
+      width: 150px;
+      height: 150px;
+  }
+</style>
+
 <body>
   <!-- NAVBAR -->
   <header class="header">
@@ -144,197 +185,61 @@
       </div>
     </section>
 
-    <!-- SECTION 2 - Related Items -->
     <section class="section-2">
-      <div class="section-2-container">
-        <h3>Related to items you've viewed</h3>
-        <div class="product-cards">
-          <div class="product-card hover1">
-            <figure>
-              <a href="/product"><img src="https://m.media-amazon.com/images/I/61Y30DpqRVL._AC_SY400_.jpg"
-                  alt="" /></a>
-            </figure>
-          </div>
-          <div class="product-card hover1">
-            <figure>
-              <a href="./product.html"> <img src="https://m.media-amazon.com/images/I/61LNnZPoKPS._AC_SY400_.jpg"
-                  alt="" /></a>
-          </div>
-          <div class="product-card hover1">
-            <figure>
-              <a href="./product.html"><img src="https://m.media-amazon.com/images/I/71iiXU7HHkL._AC_SY400_.jpg"
-                  alt="" /></a>
-          </div>
-          <div class="product-card hover1">
-            <figure>
-              <img src="https://m.media-amazon.com/images/I/61XZQXFQeVL._AC_SY400_.jpg" alt="" />
-          </div>
-          <div class="product-card hover1">
-            <figure>
-              <img src="https://m.media-amazon.com/images/I/712B4P3yOnL._AC_SY400_.jpg" alt="" />
-          </div>
-          <div class="product-card hover1">
-            <figure>
-              <img src="https://m.media-amazon.com/images/I/51eTOVYRbTL._AC_SY400_.jpg" alt="" />
-          </div>
-        </div>
-      </div>
-    </section>
+      <h2>Top Deals</h2>
+  <div class="product-container" id="product-container">
+      <!-- Product items will be dynamically inserted here -->
+  </div>
+  
+  <script type="module">
+      // Firebase Configuration
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+      import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+  
+      const firebaseConfig ={
+      'apiKey': "AIzaSyC_-alE4HXmS7kG1E4zi3Bsud8t--KaXZc",
+      'authDomain': "clone-rospl-project.firebaseapp.com",
+      'projectId': "clone-rospl-project",
+      'storageBucket': "clone-rospl-project.appspot.com",
+      'messagingSenderId': "250595430287",
+      'appId': "1:250595430287:web:6a6eb16d544272ea8585fa"
+  }
+  
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+  
+      // Fetch products from Firebase Firestore
+      async function fetchProducts() {
+          const productsSnapshot = await getDocs(collection(db, "products"));
+          const productContainer = document.getElementById("product-container");
+  
+          productsSnapshot.forEach((doc) => {
+              const product = doc.data();
+              if (product.display_category === "Top Deals") {
+              // Create product element
+              const productElement = `
+              <a href="product/${product.product_id}">
+                  <div class="product " >
+                      <img src="${product.image_url}" alt="${product.name}">
+                      <h4>${product.name}</h4>
+                      <p>Price: $${product.price}</p>
+                  </div>
+              </a>
+              `;
+  
+              // Append product to container
+              productContainer.innerHTML += productElement;
+          }
+      });
+      }
+  
+      // Load products when the page loads
+      window.onload = fetchProducts;
+  </script>
+  </section>
 
-    <!-- SECTION 2 - Groceries -->
-    <section class="section-2">
-      <div class="section-2-container">
-        <h3>Best Sellers in Grocery & Gourmet Foods</h3>
-        <div class="product-cards">
-          <div class="product-card hover1">
-            <figure>
-              <img src="https://m.media-amazon.com/images/I/617tvTiZLGL._AC_SY400_.jpg" alt="" />
-          </div>
-          <div class="product-card hover1">
-            <figure>
-              <img src="https://m.media-amazon.com/images/I/51tNket0w8L._AC_SY400_.jpg" alt="" />
-          </div>
-          <div class="product-card hover1">
-            <figure>
-              <img src="https://m.media-amazon.com/images/I/91oNY+gNzPL._AC_SY400_.jpg" alt="" />
-          </div>
-          <div class="product-card hover1">
-            <figure>
-              <img src="https://m.media-amazon.com/images/I/81NrftYFxsL._AC_SY400_.jpg" alt="" />
-          </div>
-          <div class="product-card hover1">
-            <figure>
-              <img src="https://m.media-amazon.com/images/I/61uohjMdfzL._AC_SY400_.jpg" alt="" />
-          </div>
-          <div class="product-card hover1">
-            <figure>
-              <img src="https://m.media-amazon.com/images/I/61oagbcgAtS._AC_SY400_.jpg" alt="" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3 -->
-    <section class="section-3">
-      <section class="section-3-container">
-        <h3>Inspired by your browsing history</h3>
-        <div class="product-detail-cards">
-          <div class="product-detail-card">
-            <div class="product-detail-img hover1">
-              <figure>
-                <img src="https://images-eu.ssl-images-amazon.com/images/I/61aUBxqc5PL._AC_UL320_SR320,320_.jpg"
-                  alt="" />
-              </figure>
-              </figure>
-            </div>
-            <a class="product-detail-link" href="./product.html">2021 Apple MacBook Pro (16-inch//41.05 cm, Apple M1 Max
-              chip with
-              10‑core CPU and 32‑core GPU, 32GB RAM, 1TB SSD) - Space Grey</a>
-            <p>
-              <strong class="product-price">₹ 3,99,999.00</strong>
-            </p>
-            <p class="product-deliver-by">
-              Get it by <strong>Monday, August 22</strong>
-              FREE Delivery over ₹499. Fulfilled by Amazon.
-            </p>
-          </div>
-          <div class="product-detail-card">
-            <div class="product-detail-img hover1">
-              <figure>
-
-                <img src="https://m.media-amazon.com/images/I/71ZOtNdaZCL._AC_UY436_FMwebp_QL65_.jpg" alt="" />
-              </figure>
-            </div>
-            <a class="product-detail-link" href="./product.html">2021 Apple MacBook Pro (16-inch//41.05 cm, Apple M1 Max
-              chip with
-              10‑core CPU and 32‑core GPU, 32GB RAM, 1TB SSD) - Space Grey</a>
-            <p>
-              <strong class="product-price">₹ 3,99,999.00</strong>
-            </p>
-            <p class="product-deliver-by">
-              Get it by <strong>Monday, August 22</strong>
-              FREE Delivery over ₹499. Fulfilled by Amazon.
-            </p>
-          </div>
-          <div class="product-detail-card">
-            <div class="product-detail-img hover1">
-              <figure>
-
-                <img src="https://images-eu.ssl-images-amazon.com/images/I/61LNnZPoKPS._AC_UL320_SR320,320_.jpg"
-                  alt="" />
-              </figure>
-            </div>
-            <a class="product-detail-link" href="./product.html">2021 Apple MacBook Pro (16-inch//41.05 cm, Apple M1 Max
-              chip with
-              10‑core CPU and 32‑core GPU, 32GB RAM, 1TB SSD) - Space Grey</a>
-            <p>
-              <strong class="product-price">₹ 3,99,999.00</strong>
-            </p>
-            <p class="product-deliver-by">
-              Get it by <strong>Monday, August 22</strong>
-              FREE Delivery over ₹499. Fulfilled by Amazon.
-            </p>
-          </div>
-          <div class="product-detail-card">
-            <div class="product-detail-img hover1">
-              <figure>
-
-                <img src="https://images-eu.ssl-images-amazon.com/images/I/71hmqIQJFdL._AC_UL320_SR320,320_.jpg"
-                  alt="" />
-              </figure>
-            </div>
-            <a class="product-detail-link" href="./product.html">2021 Apple MacBook Pro (16-inch//41.05 cm, Apple M1 Max
-              chip with
-              10‑core CPU and 32‑core GPU, 32GB RAM, 1TB SSD) - Space Grey</a>
-            <p>
-              <strong class="product-price">₹ 3,99,999.00</strong>
-            </p>
-            <p class="product-deliver-by">
-              Get it by <strong>Monday, August 22</strong>
-              FREE Delivery over ₹499. Fulfilled by Amazon.
-            </p>
-          </div>
-          <div class="product-detail-card">
-            <div class="product-detail-img hover1">
-              <figure>
-
-                <img src="https://images-eu.ssl-images-amazon.com/images/I/71eknZxZLmL._AC_UL320_SR320,320_.jpg"
-                  alt="" />
-              </figure>
-            </div>
-            <a class="product-detail-link" href="./product.html">2021 Apple MacBook Pro (16-inch//41.05 cm, Apple M1 Max
-              chip with
-              10‑core CPU and 32‑core GPU, 32GB RAM, 1TB SSD) - Space Grey</a>
-            <p>
-              <strong class="product-price">₹ 3,99,999.00</strong>
-            </p>
-            <p class="product-deliver-by">
-              Get it by <strong>Monday, August 22</strong>
-              FREE Delivery over ₹499. Fulfilled by Amazon.
-            </p>
-          </div>
-          <div class="product-detail-card">
-            <div class="product-detail-img hover1">
-              <figure>
-
-                <img src="https://images-eu.ssl-images-amazon.com/images/I/91k86Cdp1uL._AC_UL320_SR320,320_.jpg"
-                  alt="" />
-              </figure>
-            </div>
-            <a class="product-detail-link" href="./product.html">2021 Apple MacBook Pro (16-inch//41.05 cm, Apple M1 Max
-              chip with
-              10‑core CPU and 32‑core GPU, 32GB RAM, 1TB SSD) - Space Grey</a>
-            <p>
-              <strong class="product-price">₹ 3,99,999.00</strong>
-            </p>
-            <p class="product-deliver-by">
-              Get it by <strong>Monday, August 22</strong>
-              FREE Delivery over ₹499. Fulfilled by Amazon.
-            </p>
-          </div>
-        </div>
-      </section>
-    </section>
+  
 
     <!-- SECTION 4 -->
     <section class="section-4">
