@@ -12,20 +12,23 @@
     <div class="modalForm">
         <h2>Register</h2>
         <div>
-            <form action="" class="form user userForm">
+            <form form action="/register" method="POST" class="form user userForm">
                 <div class="inputGroup">
-                    <input type="text" placeholder="Enter Username">
+                    <input type="text" name="username" placeholder="Enter Username">
                 </div>
                 <div class="inputGroup">
-                    <input type="text" placeholder="Enter Email">
+                    <input type="text" name="email" placeholder="Enter Email">
                 </div>
                 <div class="inputGroup">
-                    <input type="text" placeholder="Enter Password">
+                    <input type="text" name="password" placeholder="Enter Password">
                 </div>
                 <div class="inputGroup">
-                    <input type="text" placeholder="Confirm Password">
+                    <input type="text" name="confirm_password" placeholder="Confirm Password">
                 </div>
-                <button type="submit" class="submitBtn">Login</button>
+                <div class="inputGroup">
+                    <input type="text" name="location" placeholder="Location">
+                </div>
+                <button type="submit" class="submitBtn">SignUp</button>
                 <div class="member">
                     <h5>Already have an account?</h5><a href="login">&nbsp Login</a>
                 </div>
